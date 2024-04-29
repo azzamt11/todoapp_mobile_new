@@ -1,5 +1,4 @@
 import 'package:todoapp_mobile/feature/data/repository/project_repository.dart';
-import 'package:todoapp_mobile/feature/data/repository/project_repository.dart';
 import 'package:todoapp_mobile/feature/domain/project/project_bloc.dart';
 import 'package:todoapp_mobile/feature/presentation/helpers/string_functions.dart';
 import 'package:todoapp_mobile/feature/presentation/widget/project_tab.dart';
