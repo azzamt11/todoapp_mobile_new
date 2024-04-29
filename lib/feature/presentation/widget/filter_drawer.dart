@@ -3,19 +3,20 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:todoapp_mobile/feature/presentation/constants/constants.dart';
+import 'package:todoapp_mobile/feature/presentation/helpers/string_functions.dart';
 
 class FilterDrawer extends StatefulWidget {
   final bool isLoading;
   final double height;
-  final String query;
   final int drawerIncrement;
-  final ValueChanged<int> stateFunction;
+  final List<String> filters;
+  final ValueChanged<List<String>> stateFunction;
   const FilterDrawer({
     Key? key,
     required this.isLoading,
     required this.height,
-    required this.query,
     required this.drawerIncrement,
+    required this.filters,
     required this.stateFunction
   }) : super(key: key);
 
@@ -26,12 +27,6 @@ class FilterDrawer extends StatefulWidget {
 class _FilterDrawerState extends State<FilterDrawer> {
   ScrollController scrollController= ScrollController();
 
-  List<String> filters= [
-    "Created",
-    "title",
-    "1"
-  ];
-
   double containerHeight= 0;
   double defaultDrawerHeight= 0;
   double initialDragValue= 0;
@@ -41,11 +36,14 @@ class _FilterDrawerState extends State<FilterDrawer> {
   bool isReadyToHide= false;
   bool higherDrawer= false;
 
+  List<String> filters= ["None", "None", "None"];
+
   @override
   void initState() {
     initializePeriodicInspection();
     setState(() {
       defaultDrawerHeight= (70+ 300).toDouble();
+      filters= widget.filters;
     });
     super.initState();
   }
@@ -167,7 +165,63 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           children: getFilterList(size, Constants().sortByList, 0),
                         )
                       )
-                    )
+                    ),
+                    const SizedBox(height: 30),
+                    const Text(
+                      "Sort Order",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      height: defaultDrawerHeight- 75,
+                      width: size.width,
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: getFilterList(size, Constants().sortByOrder, 1),
+                        )
+                      )
+                    ),
+                    const SizedBox(height: 30),
+                    const Text(
+                      "Filter",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      height: defaultDrawerHeight- 75,
+                      width: size.width,
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: getFilterList(size, Constants().filterList, 2),
+                        )
+                      )
+                    ),
+                    const SizedBox(height: 30),
+                    InkWell(
+                      onTap: () {
+                        widget.stateFunction(filters);
+                        closeDrawer();
+                      },
+                      splashColor: Colors.black12,
+                      child: Container(
+                        height: 50,
+                        width: 200,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 1, color: Colors.black12),
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Apply",
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          ),
+                        ) 
+                      )
+                    ),
                   ],
                 )
             ),
@@ -255,7 +309,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(3),
                           border: Border.all(width: 1, color: Colors.black12),
-                          color: filters[type]== filterArg[i]? Colors.black12 : Colors.white
+                          color: filters[type]== filterArg[i]? Colors.black : Colors.white
                         ),
                         child: const Center(
                           child: Icon(Icons.check, color: Colors.white, size: 20)

@@ -5,4 +5,13 @@ class Constants {
     "Created",
     "Updated",
   ];
+
+  List<String> sortByOrder= [
+    "Ascending",
+    "Descending"
+  ];
+
+  List<String> filterList= [
+    "None"
+  ];
 }
