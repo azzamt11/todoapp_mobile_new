@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_service.dart';
+part of 'project_service.dart';
 
 // **************************************************************************
 // ChopperGenerator
 // **************************************************************************
 
 // ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
-class _$UserService extends UserService {
-  _$UserService([ChopperClient? client]) {
+class _$ProjectService extends ProjectService {
+  _$ProjectService([ChopperClient? client]) {
     if (client == null) return;
     this.client = client;
   }
 
   @override
-  final definitionType = UserService;
+  final definitionType = ProjectService;
 
   @override
-  Future<Response<dynamic>> getAllUsers() {
-    final Uri $url = Uri.parse('/user');
+  Future<Response<dynamic>> getAllProjects() {
+    final Uri $url = Uri.parse('/projects');
     final Request $request = Request(
       'GET',
       $url,
@@ -28,8 +28,8 @@ class _$UserService extends UserService {
   }
 
   @override
-  Future<Response<dynamic>> getUserDetails(int id) {
-    final Uri $url = Uri.parse('/user/${id}');
+  Future<Response<dynamic>> getProject(String title) {
+    final Uri $url = Uri.parse('/projects/${title}');
     final Request $request = Request(
       'GET',
       $url,
