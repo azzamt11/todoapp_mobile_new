@@ -1,7 +1,7 @@
-import 'package:code/bloc/data/repository/project_repository.dart';
-import 'package:code/bloc/data/service/project_service.dart';
-import 'package:code/bloc/presentation/initial_page.dart';
-import 'package:code/bloc/presentation/project_page.dart';
+import 'package:code/feature/data/repository/project_repository.dart';
+import 'package:code/feature/data/service/project_service.dart';
+import 'package:code/feature/presentation/initial_page.dart';
+import 'package:code/feature/presentation/project_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logging/logging.dart';

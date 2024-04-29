@@ -1,10 +1,10 @@
 
 
 import 'package:chopper/chopper.dart';
-import 'package:code/bloc/data/model/project.dart';
-import 'package:code/bloc/data/repository/project_repository.dart';
-import 'package:code/bloc/data/repository/repository.dart';
-import 'package:code/bloc/data/service/project_service.dart';
+import 'package:code/feature/data/model/project.dart';
+import 'package:code/feature/data/repository/project_repository.dart';
+import 'package:code/feature/data/repository/repository.dart';
+import 'package:code/feature/data/service/project_service.dart';
 
 
 class ProjectRepositoryImpl implements Repository{
@@ -15,8 +15,8 @@ class ProjectRepositoryImpl implements Repository{
 
 
   @override
-  Future<Response<List<Project>>> getAllProjects() async {
-    var response = await projectService.getAllProjects();
+  Future<Response<List<Project>>> getAllProjects({String? query}) async {
+    var response = await projectService.getAllProjects(query: query);
     return response.copyWith(body: List<Project>.from(response.body.map((e) => Project.fromJson(e))));
   }
 

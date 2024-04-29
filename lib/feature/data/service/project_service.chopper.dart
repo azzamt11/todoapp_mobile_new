@@ -17,7 +17,7 @@ class _$ProjectService extends ProjectService {
   final definitionType = ProjectService;
 
   @override
-  Future<Response<dynamic>> getAllProjects() {
+  Future<Response<dynamic>> getAllProjects({String? query}) {
     final Uri $url = Uri.parse('/projects');
     final Request $request = Request(
       'GET',

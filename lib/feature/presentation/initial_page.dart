@@ -1,5 +1,5 @@
-import 'package:code/bloc/presentation/project_page.dart';
-import 'package:code/bloc/presentation/widget/text_widget.dart';
+import 'package:code/feature/presentation/project_page.dart';
+import 'package:code/feature/presentation/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
 
