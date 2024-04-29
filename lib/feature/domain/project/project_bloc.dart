@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:code/feature/data/model/project.dart';
-import 'package:code/feature/data/repository/project_repository.dart';
+import 'package:todoapp_mobile/feature/data/model/project.dart';
+import 'package:todoapp_mobile/feature/data/repository/project_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'project_event.dart';

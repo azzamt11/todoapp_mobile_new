@@ -1,10 +1,9 @@
 
 
 import 'package:chopper/chopper.dart';
-import 'package:code/feature/data/model/project.dart';
-import 'package:code/feature/data/repository/project_repository.dart';
-import 'package:code/feature/data/repository/repository.dart';
-import 'package:code/feature/data/service/project_service.dart';
+import 'package:todoapp_mobile/feature/data/model/project.dart';
+import 'package:todoapp_mobile/feature/data/repository/repository.dart';
+import 'package:todoapp_mobile/feature/data/service/project_service.dart';
 
 
 class ProjectRepositoryImpl implements Repository{

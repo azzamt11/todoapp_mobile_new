@@ -1,4 +1,4 @@
-import 'package:code/feature/data/model/project.dart';
+import 'package:todoapp_mobile/feature/data/model/project.dart';
 import 'package:flutter/material.dart';
 
 class ProjectTab extends StatelessWidget {
