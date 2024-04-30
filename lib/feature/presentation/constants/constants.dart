@@ -1,7 +1,7 @@
 class Constants {
 
   List<String> sortByList= [
-    "None"
+    "Title",
     "Created",
     "Updated",
   ];

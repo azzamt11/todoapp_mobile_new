@@ -36,13 +36,14 @@ class _FilterDrawerState extends State<FilterDrawer> {
   bool isReadyToHide= false;
   bool higherDrawer= false;
 
-  List<String> filters= ["None", "None", "None"];
+  List<String> filters= ["", "", ""];
 
   @override
   void initState() {
     initializePeriodicInspection();
+    debugPrint("filters= $filters");
     setState(() {
-      defaultDrawerHeight= (70+ 300).toDouble();
+      defaultDrawerHeight= (70+ 500).toDouble();
       filters= widget.filters;
     });
     super.initState();
@@ -141,6 +142,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     dragger(
                         Container(
@@ -151,13 +153,13 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         size
                     ),
                     const Text(
-                      "Sort By",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        "Sort By",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 20),
-                    SizedBox(
-                      height: defaultDrawerHeight- 75,
+                    Container(
                       width: size.width,
+                      padding: const EdgeInsets.only(left: 5),
                       child: SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
                         child: Column(
@@ -166,15 +168,15 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         )
                       )
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 10),
                     const Text(
-                      "Sort Order",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        "Sort Order",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 20),
-                    SizedBox(
-                      height: defaultDrawerHeight- 75,
+                    Container(
                       width: size.width,
+                      padding: const EdgeInsets.only(left: 5),
                       child: SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
                         child: Column(
@@ -183,15 +185,15 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         )
                       )
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 10),
                     const Text(
-                      "Filter",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        "Filter",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 20),
-                    SizedBox(
-                      height: defaultDrawerHeight- 75,
+                    Container(
                       width: size.width,
+                      padding: const EdgeInsets.only(left: 5),
                       child: SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
                         child: Column(
@@ -200,7 +202,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         )
                       )
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 10),
                     InkWell(
                       onTap: () {
                         widget.stateFunction(filters);
@@ -246,7 +248,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
             }
           },
           onVerticalDragEnd: (value) async{
-            if(value.velocity.pixelsPerSecond.dy >300) {
+            if(value.velocity.pixelsPerSecond.dy >500) {
               await scrollController.animateTo(
                   0,
                   duration: const Duration(milliseconds: 200),
@@ -281,13 +283,13 @@ class _FilterDrawerState extends State<FilterDrawer> {
   List<Widget> getFilterList(var size, List<String> filterArg, int type) {
     List<Widget> widgetList= [];
     for(int i=0; i< filterArg.length; i++) {
+      debugPrint("iteration $i: filterArg[i]= ${filterArg[i]}");
       widgetList.add(
         GestureDetector(
           onTap: () {
             setState(() {
                filters[type]= filterArg[i];
             });
-            closeDrawer();
           },
           child: Container(
             height: 50,
@@ -359,7 +361,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
     while(true) {
       if(widget.drawerIncrement>localDrawerIncrement) {
         setState(() {
-          defaultDrawerHeight= (100+ 300).toDouble();
+          defaultDrawerHeight= (100+ 500).toDouble();
         });
         FocusScope.of(context).requestFocus(FocusNode());
         setState(() {

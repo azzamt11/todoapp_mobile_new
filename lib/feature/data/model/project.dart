@@ -16,7 +16,7 @@ class Project {
   @JsonKey(name: 'deletedAt')
   final DateTime? deletedAt;
   @JsonKey(name:'archived')
-  final DateTime? archived;
+  final bool? archived;
 
   Project(
       {this.id,

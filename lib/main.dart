@@ -1,7 +1,7 @@
 import 'package:todoapp_mobile/feature/data/repository/project_repository.dart';
 import 'package:todoapp_mobile/feature/data/service/project_service.dart';
 import 'package:todoapp_mobile/feature/presentation/initial_page.dart';
-import 'package:todoapp_mobile/feature/presentation/project_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logging/logging.dart';

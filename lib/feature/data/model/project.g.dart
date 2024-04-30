@@ -18,9 +18,7 @@ Project _$ProjectFromJson(Map<String, dynamic> json) => Project(
       deletedAt: json['deletedAt'] == null
           ? null
           : DateTime.parse(json['deletedAt'] as String),
-      archived: json['archived'] == null
-          ? null
-          : DateTime.parse(json['archived'] as String),
+      archived: json['archived'] as bool?,
     );
 
 Map<String, dynamic> _$ProjectToJson(Project instance) => <String, dynamic>{
@@ -29,5 +27,5 @@ Map<String, dynamic> _$ProjectToJson(Project instance) => <String, dynamic>{
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'deletedAt': instance.deletedAt?.toIso8601String(),
-      'archived': instance.archived?.toIso8601String(),
+      'archived': instance.archived,
     };

@@ -17,7 +17,11 @@ class _ProjectPageState extends State<ProjectPage> {
 
   String query= "?page=1";
 
-  List<String> filters= [];
+  List<String> filters= [
+    "Created",
+    "Ascending",
+    "None"
+  ];
 
   @override
   void initState() {
@@ -47,13 +51,22 @@ class _ProjectPageState extends State<ProjectPage> {
       return ProjectTab(
         projects: state.projects, 
         blocFunction: blocFunction, 
-        filters: filters
+        filters: filters,
+        searchFunction: searchFunction,
       );
     }
     return const Text('Unable to fetch the project!');
   }
 
-  void blocFunction(List<String> filters) {
+  void blocFunction(List<String> filters) async {
+    debugPrint("bloc function is executed!");
     _projectBloc.add(ProjectFilter(StringFunctions().getProjectQuery(filters)));
+    setState(() {});
+  }
+
+  void searchFunction(String text) async {
+    debugPrint("bloc function is executed!");
+    _projectBloc.add(ProjectFilter("${StringFunctions().getProjectQuery(filters)}&search= $text"));
+    setState(() {});
   }
 }
