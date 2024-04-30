@@ -57,7 +57,7 @@ class _ProjectTabState extends State<ProjectTab> {
                   child: Container(
                       height: size.height,
                       width: size.width,
-                      padding: const EdgeInsets.only(top: 56),
+                      padding: const EdgeInsets.only(top: 15),
                       child: Stack(
                         children: [
                           SizedBox(
@@ -65,12 +65,12 @@ class _ProjectTabState extends State<ProjectTab> {
                               child: Column(
                                 mainAxisAlignment: isSearchLoading? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
                                 children: [
-                                  SizedBox(
-                                    height: 100,
+                                  Container(
+                                    height: 45,
                                     width: size.width,
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         getInputField(size),
                                         const SizedBox(width: 20),
@@ -123,8 +123,15 @@ class _ProjectTabState extends State<ProjectTab> {
       padding: const EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(width: 1, color: Colors.grey),
         color: Colors.white,
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            offset: Offset(0, 4),
+            blurRadius: 3,
+            spreadRadius: 3
+          )
+        ]
       ),
       child: Align(
           alignment: Alignment.centerLeft,
@@ -170,7 +177,7 @@ class _ProjectTabState extends State<ProjectTab> {
     double cardWidth= 150;
     return Container(
         width: size.width,
-        height: size.height- 183,
+        height: size.height- 100,
         padding: const EdgeInsets.only(left: 13, right: 13, top: 10),
         child: InfiniteGridView(
           physics: const BouncingScrollPhysics(),

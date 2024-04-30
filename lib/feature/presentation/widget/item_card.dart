@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:todoapp_mobile/feature/data/model/project.dart';
+import 'package:todoapp_mobile/feature/presentation/widget/text_widget.dart';
 
 class ItemCard extends StatefulWidget {
   final Project data;
@@ -51,7 +52,8 @@ class _ItemCardState extends State<ItemCard> {
                 child: Icon(Icons.folder, size: 50, color: Colors.orange),
               )
             ),
-            Text(widget.data.title?? "Untitled")
+            TextWidget(text: widget.data.title?? "Untitles", type: 2),
+            TextWidget(text: widget.data.createdAt.toString(), type: 3)
           ],
         )
     );

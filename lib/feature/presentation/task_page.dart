@@ -12,6 +12,7 @@ class _TaskPageState extends State<TaskPage> {
   Widget build(BuildContext context) {
     var size= MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         height: size.height,
         width: size.width,

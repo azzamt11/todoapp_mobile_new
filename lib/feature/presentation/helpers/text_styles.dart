@@ -14,6 +14,14 @@ class TextStyles {
         color= Colors.black;
         fontSize= 14;
       }
+      case 2: {
+        color= Colors.black;
+        fontSize= 16;
+      }
+      case 3: {
+        color= Colors.orange;
+        fontSize= 13;
+      }
       default: {
         color= Colors.black;
         fontSize= 14;

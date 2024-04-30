@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class InputField extends StatefulWidget {
@@ -49,20 +50,24 @@ class _InputFieldState extends State<InputField> {
           focusNode: widget.node,
           controller: controller,
           obscureText: obscureText,
-          style: const TextStyle(
-              fontSize: 15.5,
-              height: 1.5,
-              color: Colors.black
+          style: GoogleFonts.dosis(
+            textStyle: const TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              decorationThickness: 1.2,
+            ),
           ),
           decoration: InputDecoration(
               contentPadding: const EdgeInsets.only(bottom: 2, top: 2),
               alignLabelWithHint: true,
               isDense: true,
               focusColor: Colors.black,
-              hintStyle: const TextStyle(
+              hintStyle: GoogleFonts.dosis(
+                textStyle: const TextStyle(
+                  fontSize: 16,
                   color: Colors.black,
-                  fontSize: 15.5,
-                  height: 1.5
+                  decorationThickness: 1.2,
+                ),
               ),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,

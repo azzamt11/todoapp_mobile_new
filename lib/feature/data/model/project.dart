@@ -9,11 +9,11 @@ class Project {
   final int? id;
   @JsonKey(name:'title')
   final String? title;
-  @JsonKey(name:'createdAt')
+  @JsonKey(name:'created_at')
   final DateTime? createdAt;
-  @JsonKey(name:'updatedAt')
+  @JsonKey(name:'updated_at')
   final DateTime? updatedAt;
-  @JsonKey(name: 'deletedAt')
+  @JsonKey(name: 'deleted_at')
   final DateTime? deletedAt;
   @JsonKey(name:'archived')
   final bool? archived;
