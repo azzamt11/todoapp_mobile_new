@@ -7,25 +7,25 @@ part of 'project.dart';
 // **************************************************************************
 
 Project _$ProjectFromJson(Map<String, dynamic> json) => Project(
-      id: json['id'] as int?,
+      id: json['ID'] as int?,
       title: json['title'] as String?,
-      createdAt: json['created_at'] == null
+      createdAt: json['CreatedAt'] == null
           ? null
-          : DateTime.parse(json['created_at'] as String),
-      updatedAt: json['updated_at'] == null
+          : DateTime.parse(json['CreatedAt'] as String),
+      updatedAt: json['UpdatedAt'] == null
           ? null
-          : DateTime.parse(json['updated_at'] as String),
-      deletedAt: json['deleted_at'] == null
+          : DateTime.parse(json['UpdatedAt'] as String),
+      deletedAt: json['DeletedAt'] == null
           ? null
-          : DateTime.parse(json['deleted_at'] as String),
+          : DateTime.parse(json['DeletedAt'] as String),
       archived: json['archived'] as bool?,
     );
 
 Map<String, dynamic> _$ProjectToJson(Project instance) => <String, dynamic>{
-      'id': instance.id,
+      'ID': instance.id,
       'title': instance.title,
-      'created_at': instance.createdAt?.toIso8601String(),
-      'updated_at': instance.updatedAt?.toIso8601String(),
-      'deleted_at': instance.deletedAt?.toIso8601String(),
+      'CreatedAt': instance.createdAt?.toIso8601String(),
+      'UpdatedAt': instance.updatedAt?.toIso8601String(),
+      'DeletedAt': instance.deletedAt?.toIso8601String(),
       'archived': instance.archived,
     };

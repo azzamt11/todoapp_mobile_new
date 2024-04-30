@@ -15,7 +15,7 @@ class TextStyles {
         fontSize= 14;
       }
       case 2: {
-        color= Colors.black;
+        color= Colors.white;
         fontSize= 16;
       }
       case 3: {

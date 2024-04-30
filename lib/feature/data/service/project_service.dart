@@ -5,8 +5,8 @@ part 'project_service.chopper.dart';
 @ChopperApi(baseUrl: "/projects")
 abstract class ProjectService extends ChopperService {
 
-  @Get()
-  Future<Response> getAllProjects({String? query});
+  @Get(path: "{query}")
+  Future<Response> getAllProjects({@Path("query") String? query});
 
   @Get(path: "/{title}")
   Future<Response> getProject(@Path("title") String title);

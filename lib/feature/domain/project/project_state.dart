@@ -1,28 +1,14 @@
-part of 'project_bloc.dart';
+import 'package:todoapp_mobile/feature/data/model/project.dart';
 
 abstract class ProjectState {}
 
-class ProjectLoading extends ProjectState {
-  @override
-  String toString() {
-    return "ProjectLoading";
-  }
-}
+class InitialProjectState extends ProjectState {}
+
+class ProjectLoading extends ProjectState {}
 
 class ProjectLoaded extends ProjectState {
   final List<Project> projects;
+  final bool done;
 
-  ProjectLoaded(this.projects);
-
-  @override
-  String toString() {
-    return "ProjectLoaded";
-  }
-}
-
-class ProjectError extends ProjectState {
-  @override
-  String toString() {
-    return "ProjectError";
-  }
+  ProjectLoaded(this.projects, this.done);
 }

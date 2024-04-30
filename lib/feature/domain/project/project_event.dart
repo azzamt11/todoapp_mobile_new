@@ -1,13 +1,13 @@
-part of 'project_bloc.dart';
-
 abstract class ProjectEvent {}
 
-class ProjectInfo extends ProjectEvent {
-
-} 
-
-class ProjectFilter extends ProjectEvent {
+class ProjectLoad extends ProjectEvent {
   final String query;
 
-  ProjectFilter(this.query);
+  ProjectLoad(this.query);
+}
+
+class ProjectLoadMore extends ProjectEvent {
+  final String query;
+
+  ProjectLoadMore(this.query);
 }

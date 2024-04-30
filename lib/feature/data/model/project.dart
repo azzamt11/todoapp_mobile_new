@@ -1,25 +1,26 @@
 
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'project.g.dart';
 
 @JsonSerializable()
 class Project {
-  @JsonKey(name:'id')
+  @JsonKey(name:'ID')
   final int? id;
   @JsonKey(name:'title')
   final String? title;
-  @JsonKey(name:'created_at')
+  @JsonKey(name:'CreatedAt')
   final DateTime? createdAt;
-  @JsonKey(name:'updated_at')
+  @JsonKey(name:'UpdatedAt')
   final DateTime? updatedAt;
-  @JsonKey(name: 'deleted_at')
+  @JsonKey(name: 'DeletedAt')
   final DateTime? deletedAt;
   @JsonKey(name:'archived')
   final bool? archived;
 
-  Project(
-      {this.id,
+  Project({
+      this.id,
       this.title,
       this.createdAt,
       this.updatedAt,
@@ -28,6 +29,7 @@ class Project {
       });
 
   factory Project.fromJson(final Map<String, dynamic> json) {
+    debugPrint("json_response= ${json.toString()}");
     return _$ProjectFromJson(json);
   }
 

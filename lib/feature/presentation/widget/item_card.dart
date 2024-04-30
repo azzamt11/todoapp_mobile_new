@@ -31,15 +31,7 @@ class _ItemCardState extends State<ItemCard> {
         margin: const EdgeInsets.all(8),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: Colors.white,
-            boxShadow: const [
-              BoxShadow(
-                spreadRadius: 2,
-                blurRadius: 8,
-                color: Colors.black12,
-                offset: Offset(0, 3),
-              )
-            ]
+            color: Color.fromRGBO(31, 31, 31, 1),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

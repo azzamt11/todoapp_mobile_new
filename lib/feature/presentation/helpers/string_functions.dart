@@ -5,9 +5,17 @@ class StringFunctions {
   String getProjectQuery(List<String> filters) {
     debugPrint("filters= ${filters}");
     if(filters.length> 1) {
-      return "?page=1&page_size=10&sort_by=${filters[0].toLowerCase()}&sort_order=${filters[1].substring(0, 3).toLowerCase()}";
+      return "?sort_by=${filters[0].toLowerCase()}&sort_order=${getOrderCode(filters[1])}";
     } else {
-      return "?page=1&page_size=10&sort_by=${filters[0].toLowerCase()}&sort_order=asc";
+      return "?sort_by=${filters[0].toLowerCase()}&sort_order=asc";
+    }
+  }
+
+  String getOrderCode(String orderTitle) {
+    switch(orderTitle) {
+      case "Ascending": return "asc";
+      case "Descending": return "desc";
+      default: return "asc";
     }
   }
 }
