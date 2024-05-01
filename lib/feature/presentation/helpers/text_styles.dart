@@ -22,6 +22,11 @@ class TextStyles {
         color= Colors.orange;
         fontSize= 13;
       }
+      case 3: {
+        color= Colors.black;
+        fontSize= 20;
+        fontWeight= FontWeight.bold;
+      }
       default: {
         color= Colors.black;
         fontSize= 14;

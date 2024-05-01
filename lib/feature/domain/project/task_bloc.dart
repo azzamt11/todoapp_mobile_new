@@ -25,14 +25,20 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   Stream<TaskState> mapEventToState(TaskEvent event) async* {
     if (event is TaskLoad) {
       yield TaskLoading();
-      Response<List<Task>> response =  await tasksRepository.getAllTasks(query: event.query);
+      Response<List<Task>> response =  await tasksRepository.getAllTasks(
+        projectTitle: event.projectTitle, 
+        query: event.query
+      );
       tasks= response.body?? [];
       loadMoreCount = initLoadCount;
       yield TaskLoaded(tasks, response.body!.isEmpty);
     }
     if (event is TaskLoadMore) {
       loadedLastIndex += loadMoreCount;
-      Response<List<Task>> response =  await tasksRepository.getAllTasks(query: event.query);
+      Response<List<Task>> response =  await tasksRepository.getAllTasks(
+        projectTitle: event.projectTitle, 
+        query: event.query
+      );
       tasks += (response.body?? []);
       yield TaskLoaded(tasks, response.body!.isEmpty);
     }

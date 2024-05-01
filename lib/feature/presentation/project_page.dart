@@ -237,7 +237,11 @@ class _ProjectPageState extends State<ProjectPage> {
                   return ItemCard(
                     data: state.projects[i], 
                     onTapFunction: (size) {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> TaskPage()));
+                      Navigator.push(
+                        context, MaterialPageRoute(
+                          builder: (context)=> TaskPage(project: state.projects[i])
+                        )
+                      );
                     }
                   );
                 }

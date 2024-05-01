@@ -2,14 +2,17 @@ import 'package:chopper/chopper.dart';
 
 part 'task_service.chopper.dart';
 
-@ChopperApi(baseUrl: "/tasks")
+@ChopperApi(baseUrl: "/projects")
 abstract class TaskService extends ChopperService {
 
-  @Get(path: "{query}")
-  Future<Response> getAllTasks({@Path("query") String? query});
+  @Get(path: "/{projectTitle}/tasks{query}")
+  Future<Response> getAllTasks({@Path("projectTitle") String? projectTitle, @Path("query") String? query});
 
-  @Get(path: "/{title}")
-  Future<Response> getTask(@Path("title") String title);
+  @Get(path: "/{projectTitle}/tasks/{title}")
+  Future<Response> getTask(@Path("projectTitle") String? projectTitle, @Path("title") String title);
+  
+  @Post(path: "/{projectTitle}/tasks")
+  Future<Response> postTask(@Path("projectTitle") String? projectTitle);
 
   static TaskService create() {
     final client = ChopperClient(

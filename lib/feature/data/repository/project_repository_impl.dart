@@ -11,8 +11,6 @@ class ProjectRepositoryImpl implements ProjectRepository{
 
   ProjectRepositoryImpl({required this.projectService});
 
-
-
   @override
   Future<Response<List<Project>>> getAllProjects({String? query}) async {
     var response = await projectService.getAllProjects(query: query);

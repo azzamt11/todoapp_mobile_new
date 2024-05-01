@@ -2,11 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp_mobile/feature/data/model/project.dart';
 import 'package:todoapp_mobile/feature/data/repository/task_repository_impl.dart';
 import 'package:todoapp_mobile/feature/domain/project/task_bloc.dart';
 import 'package:todoapp_mobile/feature/domain/project/task_event.dart';
 import 'package:todoapp_mobile/feature/domain/project/task_state.dart';
 import 'package:todoapp_mobile/feature/presentation/helpers/string_functions.dart';
+import 'package:todoapp_mobile/feature/presentation/helpers/text_styles.dart';
 import 'package:todoapp_mobile/feature/presentation/task_page.dart';
 
 import 'package:todoapp_mobile/feature/presentation/widget/filter_drawer.dart';
@@ -16,8 +18,10 @@ import 'package:todoapp_mobile/feature/presentation/widget/task_item_card.dart';
 
 
 class TaskPage extends StatefulWidget {
+  final Project project;
   const TaskPage({
     super.key,
+    required this.project
   });
 
   @override
@@ -55,7 +59,10 @@ class _TaskPageState extends State<TaskPage> {
     _taskBloc = TaskBloc(tasksRepository: _taskRepository);
 
     //initial data load
-    _taskBloc.add(TaskLoad(StringFunctions().getTaskQuery(filters)));
+    _taskBloc.add(TaskLoad(
+      widget.project.title??"Untitled", 
+      StringFunctions().getTaskQuery(filters)
+    ));
 
     //triggers when scrolling reached to bottom
     infGridController.addListener(() {
@@ -101,7 +108,7 @@ class _TaskPageState extends State<TaskPage> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        getInputField(size),
+                                        Text(widget.project.title?? "Untitled", style: TextStyles().getStyle(4)),
                                         const SizedBox(width: 20),
                                         SizedBox(
                                           height: 40,
@@ -250,7 +257,10 @@ class _TaskPageState extends State<TaskPage> {
   }
 
   Future<void> stateFunction(List<String> filters) async{
-    _taskBloc.add(TaskLoad(StringFunctions().getTaskQuery(filters)));
+    _taskBloc.add(TaskLoad(
+      widget.project.title??"Untitled",
+      StringFunctions().getTaskQuery(filters)
+    ));
     Future.delayed(const Duration(milliseconds: 500));
     setState(() {
       drawerIncrement++;
@@ -261,6 +271,7 @@ class _TaskPageState extends State<TaskPage> {
   void loadData(String text) async {
     debugPrint("bloc function is executed!");
     _taskBloc.add(TaskLoad(
+      widget.project.title??"Untitled",
       "${StringFunctions().getTaskQuery(filters)}&search=$text&page=1"
     ));
     setState(() {
@@ -272,6 +283,7 @@ class _TaskPageState extends State<TaskPage> {
   // Check if the bloc state is not loading
    print("load more data...");
     _taskBloc.add(TaskLoadMore(
+      widget.project.title??"Untitled",
       "${StringFunctions().getTaskQuery(filters)}&search=${searchText.length> 3? searchText: ""}&page=${currentPage+1}"
     ));
     if(!localDone) {

@@ -26,14 +26,9 @@ class _ItemCardState extends State<ItemCard> {
 
   @override
   Widget build(BuildContext context) {
+    var size= MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context, MaterialPageRoute(
-            builder: (context)=> TaskPage()
-          )
-        );
-      },
+      onTap: () {widget.onTapFunction(size);},
       child: Container(
         height: 150,
         width: 150,

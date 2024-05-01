@@ -17,8 +17,11 @@ class _$TaskService extends TaskService {
   final definitionType = TaskService;
 
   @override
-  Future<Response<dynamic>> getAllTasks({String? query}) {
-    final Uri $url = Uri.parse('/tasks/${query}');
+  Future<Response<dynamic>> getAllTasks({
+    String? projectTitle,
+    String? query,
+  }) {
+    final Uri $url = Uri.parse('/projects/${projectTitle}/tasks${query}');
     final Request $request = Request(
       'GET',
       $url,
@@ -28,10 +31,24 @@ class _$TaskService extends TaskService {
   }
 
   @override
-  Future<Response<dynamic>> getTask(String title) {
-    final Uri $url = Uri.parse('/tasks/${title}');
+  Future<Response<dynamic>> getTask(
+    String? projectTitle,
+    String title,
+  ) {
+    final Uri $url = Uri.parse('/projects/${projectTitle}/tasks/${title}');
     final Request $request = Request(
       'GET',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> postTask(String? projectTitle) {
+    final Uri $url = Uri.parse('/projects/${projectTitle}/tasks');
+    final Request $request = Request(
+      'POST',
       $url,
       client.baseUrl,
     );
