@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:todoapp_mobile/feature/data/model/project.dart';
+import 'package:todoapp_mobile/feature/presentation/task_page.dart';
 import 'package:todoapp_mobile/feature/presentation/widget/text_widget.dart';
 
 class ItemCard extends StatefulWidget {
@@ -25,7 +26,15 @@ class _ItemCardState extends State<ItemCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context, MaterialPageRoute(
+            builder: (context)=> TaskPage()
+          )
+        );
+      },
+      child: Container(
         height: 150,
         width: 150,
         margin: const EdgeInsets.all(8),
@@ -48,6 +57,7 @@ class _ItemCardState extends State<ItemCard> {
             TextWidget(text: widget.data.createdAt.toString(), type: 3)
           ],
         )
+      )
     );
   }
 }

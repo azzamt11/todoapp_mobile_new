@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:chopper/chopper.dart';
 import 'package:todoapp_mobile/feature/data/model/project.dart';
-import 'package:todoapp_mobile/feature/data/repository/project_repository.dart';
+import 'package:todoapp_mobile/feature/data/repository/project_repository_impl.dart';
 
 import 'package:todoapp_mobile/feature/domain/project/project_event.dart';
 import 'package:todoapp_mobile/feature/domain/project/project_state.dart';
