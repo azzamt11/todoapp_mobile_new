@@ -35,10 +35,8 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
 
   List<TextEditingController> controllerList= [];
 
-  bool updateIsLoading= false;
-  bool deleteIsLoading= false;
-  bool dataIsLoading= false;
   bool isChoosingPriority= false;
+  bool isLoading= false;
 
   double bottomMargin= 0;
 
@@ -163,7 +161,9 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
             height: 30,
             width: 300,
             child: Center(
-              child: Text("Submit", style: TextStyles().getStyle(2))
+              child: isLoading
+              ? CircularProgressIndicator(color: Colors.white) 
+              : Text("Submit", style: TextStyles().getStyle(2))
             )
           )
         )
@@ -470,12 +470,17 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
   }
 
   Future<void> submitFunction() async{
+    setState(() {
+      isLoading= true;
+    });
     _taskBloc.add(TaskCreate(
       widget.data.id??0,
       {
         "title": titleController.text,
         "deadline": deadline,
-        "priority": priority.level
+        "priority": priority.level,
+        "done": false,
+        "project_id": widget.data.id
       }
     ));
     Navigator.pop(context);
