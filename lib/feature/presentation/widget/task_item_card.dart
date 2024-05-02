@@ -25,7 +25,6 @@ class TaskItemCard extends StatefulWidget {
 class _TaskItemCardState extends State<TaskItemCard> {
   @override
   Widget build(BuildContext context) {
-    var size= MediaQuery.of(context).size;
     double descriptionWidth= widget.defaultWidth- 90- 30;
     return Container(
         height: 140,
@@ -141,7 +140,9 @@ class _TaskItemCardState extends State<TaskItemCard> {
                                 height: 26,
                                 width: 26,
                                 child: Center(
-                                  child: Icon(Icons.delete_outline,
+                                  child: widget.deleteIsLoading
+                                    ? CircularProgressIndicator(color: Colors.white) 
+                                    : Icon(Icons.delete_outline,
                                     color: Colors.white,
                                     size: 25
                                   ),

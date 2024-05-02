@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 class InputField extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode node;
-  final int index;
   final String string;
   final bool obscure;
   final TextInputType textInputType;
@@ -16,7 +15,6 @@ class InputField extends StatefulWidget {
     Key? key,
     required this.controller,
     required this.node,
-    required this.index,
     required this.string,
     required this.obscure,
     required this.textInputType,

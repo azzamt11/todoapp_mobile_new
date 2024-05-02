@@ -1,4 +1,3 @@
-import 'package:todoapp_mobile/feature/data/model/task.dart';
 import 'package:chopper/chopper.dart';
 
 abstract class TaskRepository{

@@ -35,6 +35,10 @@ class TextStyles {
         color= Colors.green;
         fontSize= 15;
       }
+      case 7: {
+        color= Colors.grey;
+        fontSize= 20;
+      }
       default: {
         color= Colors.black;
         fontSize= 14;

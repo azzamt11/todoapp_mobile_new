@@ -1,10 +1,6 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:todoapp_mobile/feature/presentation/constants/constants.dart';
-import 'package:todoapp_mobile/feature/presentation/helpers/string_functions.dart';
-
 class FilterDrawer extends StatefulWidget {
   final bool isLoading;
   final double height;

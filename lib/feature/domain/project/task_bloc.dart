@@ -18,7 +18,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc({required this.tasksRepository})
       : super(TaskLoading());
 
-  @override
   TaskState get initialState => InitialTaskState();
 
   @override
@@ -44,12 +43,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     }
     if (event is TaskDelete) {
       loadedLastIndex += loadMoreCount;
-      Response<dynamic> response =  await tasksRepository.deleteTask(event.projectId, event.id);
+      await tasksRepository.deleteTask(event.projectId, event.id);
       Response<List<Task>> reloadResponse =  await tasksRepository.getAllTasks(
         projectId: event.projectId, 
         query: event.query,
       );
-      tasks += (response.body?? []);
+      tasks = (reloadResponse.body?? []);
       yield TaskLoaded(tasks, reloadResponse.body!.isEmpty);
     }
   }

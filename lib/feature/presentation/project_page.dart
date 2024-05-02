@@ -193,7 +193,6 @@ class _ProjectPageState extends State<ProjectPage> {
                 child: InputField(
                   controller: controller,
                   node: node,
-                  index: 0,
                   string: "Cari Project",
                   obscure: false,
                   textInputType: TextInputType.text,

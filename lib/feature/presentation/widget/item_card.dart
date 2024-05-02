@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:todoapp_mobile/feature/data/model/project.dart';
-import 'package:todoapp_mobile/feature/presentation/task_page.dart';
 import 'package:todoapp_mobile/feature/presentation/widget/text_widget.dart';
 
 class ItemCard extends StatefulWidget {

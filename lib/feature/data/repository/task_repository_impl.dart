@@ -2,7 +2,6 @@
 
 import 'package:chopper/chopper.dart';
 import 'package:todoapp_mobile/feature/data/model/task.dart';
-import 'package:todoapp_mobile/feature/data/repository/project_repository.dart';
 import 'package:todoapp_mobile/feature/data/repository/task_repository.dart';
 import 'package:todoapp_mobile/feature/data/service/task_service.dart';
 
@@ -31,9 +30,9 @@ class TaskRepositoryImpl implements TaskRepository{
     return  response.copyWith(body: Task.fromJson(response.body));
   }
 
-  Future<Response<Task>> deleteTask(int projectId, int id) async {
+  Future<Response> deleteTask(int projectId, int id) async {
     var response = await taskService.deleteTask(projectId, id);
-    return  response.copyWith(body: response.body);
+    return  response;
   }
 
 }

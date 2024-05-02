@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -8,11 +9,13 @@ import 'package:todoapp_mobile/feature/domain/project/task_bloc.dart';
 import 'package:todoapp_mobile/feature/domain/project/task_event.dart';
 import 'package:todoapp_mobile/feature/domain/project/task_state.dart';
 import 'package:todoapp_mobile/feature/presentation/constants/constants.dart';
+import 'package:todoapp_mobile/feature/presentation/create_task_page.dart';
 import 'package:todoapp_mobile/feature/presentation/helpers/string_functions.dart';
 import 'package:todoapp_mobile/feature/presentation/helpers/text_styles.dart';
 
 import 'package:todoapp_mobile/feature/presentation/widget/filter_drawer.dart';
 import 'package:todoapp_mobile/feature/presentation/widget/input_field.dart';
+import 'package:todoapp_mobile/feature/presentation/task_edit_page.dart';
 import 'package:todoapp_mobile/feature/presentation/widget/task_item_card.dart';
 
 
@@ -177,6 +180,23 @@ class _TaskPageState extends State<TaskPage> {
               )
             )
           ),
+          Positioned(
+            bottom: 30,
+            right: 30,
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context, MaterialPageRoute(
+                    builder: (context)=> CreateTaskPage()
+                  )
+                );
+              },
+              backgroundColor: Colors.black,
+              child: Center(
+                child: Icon(Icons.add, color: Colors.white, size: 30)
+              )
+            )
+          ),
           FilterDrawer(
             isLoading: false, 
             height: size.height, 
@@ -259,7 +279,7 @@ class _TaskPageState extends State<TaskPage> {
         child: BlocBuilder(
           bloc: _taskBloc,
           builder: (context, state) {
-            if (state is TaskLoaded) {
+            if (state is TaskLoaded && state.tasks.isNotEmpty) {
               return ListView.builder(
                 controller: infGridController, 
                 itemCount: state.tasks.length+ (!state.done? 1 : 0),
@@ -281,6 +301,22 @@ class _TaskPageState extends State<TaskPage> {
                     type: 1
                   );
                 }
+              );
+            } else if(state is TaskLoaded) {
+              return Container(
+                height: size.height,
+                width: size.width,
+                child: Column(
+                  children: [
+                    SizedBox(height: max(size.height/2- 100, 0)),
+                    Icon(Icons.question_mark_outlined, color: Colors.grey, size: 50),
+                    Text(
+                      "Empty!", 
+                      style: TextStyles().getStyle(7),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                )
               );
             }
             return Container(

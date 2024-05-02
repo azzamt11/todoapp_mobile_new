@@ -19,7 +19,6 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   ProjectBloc({required this.projectsRepository})
       : super(ProjectLoading());
 
-  @override
   ProjectState get initialState => InitialProjectState();
 
   @override
