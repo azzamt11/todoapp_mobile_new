@@ -12,7 +12,7 @@ abstract class TaskService extends ChopperService {
   Future<Response> getTask(@Path("projectId") int? projectId, @Path("id") int id);
   
   @Post(path: "/{projectId}/tasks")
-  Future<Response> postTask(@Path("projectId") int? projectId);
+  Future<Response> postTask(@Path("projectId") int? projectId, @Body() Map<String, dynamic> body);
 
   @Delete(path: "/{projectId}/tasks/{id}")
   Future<Response> deleteTask(@Path("projectId") int? projectId, @Path("id") int id);

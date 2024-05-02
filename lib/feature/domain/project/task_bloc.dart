@@ -51,5 +51,15 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       tasks = (reloadResponse.body?? []);
       yield TaskLoaded(tasks, reloadResponse.body!.isEmpty);
     }
+    if (event is TaskCreate) {
+      loadedLastIndex += loadMoreCount;
+      await tasksRepository.postTask(event.projectId, event.body);
+      Response<List<Task>> reloadResponse =  await tasksRepository.getAllTasks(
+        projectId: event.projectId,
+        query: "",
+      );
+      tasks = (reloadResponse.body?? []);
+      yield TaskLoaded(tasks, reloadResponse.body!.isEmpty);
+    }
   }
 }

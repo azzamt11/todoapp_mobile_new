@@ -25,8 +25,8 @@ class TaskRepositoryImpl implements TaskRepository{
     return  response.copyWith(body: Task.fromJson(response.body));
   }
 
-  Future<Response<Task>> postTask(int projectId) async {
-    var response = await taskService.postTask(projectId);
+  Future<Response<Task>> postTask(int projectId, Map<String, dynamic> body) async {
+    var response = await taskService.postTask(projectId, body);
     return  response.copyWith(body: Task.fromJson(response.body));
   }
 

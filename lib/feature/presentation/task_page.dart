@@ -1,8 +1,8 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:todoapp_mobile/feature/data/model/project.dart';
 import 'package:todoapp_mobile/feature/data/repository/task_repository_impl.dart';
 import 'package:todoapp_mobile/feature/domain/project/task_bloc.dart';
@@ -12,10 +12,8 @@ import 'package:todoapp_mobile/feature/presentation/constants/constants.dart';
 import 'package:todoapp_mobile/feature/presentation/create_task_page.dart';
 import 'package:todoapp_mobile/feature/presentation/helpers/string_functions.dart';
 import 'package:todoapp_mobile/feature/presentation/helpers/text_styles.dart';
-
 import 'package:todoapp_mobile/feature/presentation/widget/filter_drawer.dart';
 import 'package:todoapp_mobile/feature/presentation/widget/input_field.dart';
-import 'package:todoapp_mobile/feature/presentation/task_edit_page.dart';
 import 'package:todoapp_mobile/feature/presentation/widget/task_item_card.dart';
 
 
@@ -187,7 +185,7 @@ class _TaskPageState extends State<TaskPage> {
               onPressed: () {
                 Navigator.push(
                   context, MaterialPageRoute(
-                    builder: (context)=> CreateTaskPage()
+                    builder: (context)=> CreateTaskPage(data: widget.project)
                   )
                 );
               },
@@ -251,7 +249,6 @@ class _TaskPageState extends State<TaskPage> {
                 child: InputField(
                   controller: controller,
                   node: node,
-                  index: 0,
                   string: "Cari Task",
                   obscure: false,
                   textInputType: TextInputType.text,

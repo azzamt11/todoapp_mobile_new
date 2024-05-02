@@ -7,6 +7,13 @@ class TaskLoad extends TaskEvent {
   TaskLoad(this.projectId, this.query);
 }
 
+class TaskLoadMore extends TaskEvent {
+  final int projectId;
+  final String query;
+
+  TaskLoadMore(this.projectId, this.query);
+}
+
 class TaskDelete extends TaskEvent {
   final int projectId;
   final int id;
@@ -15,9 +22,9 @@ class TaskDelete extends TaskEvent {
   TaskDelete(this.projectId, this.id, this.query);
 }
 
-class TaskLoadMore extends TaskEvent {
+class TaskCreate extends TaskEvent {
   final int projectId;
-  final String query;
+  final Map<String, dynamic> body;
 
-  TaskLoadMore(this.projectId, this.query);
+  TaskCreate(this.projectId, this.body);
 }
