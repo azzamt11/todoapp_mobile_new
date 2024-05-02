@@ -7,7 +7,7 @@ class TaskItemCard extends StatefulWidget {
   final Task data;
   final double defaultWidth;
   final bool deleteIsLoading;
-  final Function deleteFunction;
+  final ValueChanged<int> deleteFunction;
   final int type;
   const TaskItemCard({
     Key? key,
@@ -133,7 +133,7 @@ class _TaskItemCardState extends State<TaskItemCard> {
                             child: InkWell(
                               onTap: () {
                                 if(!widget.deleteIsLoading) {
-                                  widget.deleteFunction(widget.data.id??0, size);
+                                  widget.deleteFunction(widget.data.id??0);
                                 }
                               },
                               splashColor: Colors.white12,
@@ -168,9 +168,7 @@ class _TaskItemCardState extends State<TaskItemCard> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
-                                if(!widget.deleteIsLoading) {
-                                  widget.deleteFunction(widget.data.id??0, size);
-                                }
+                                
                               },
                               splashColor: Colors.white12,
                               child: SizedBox(

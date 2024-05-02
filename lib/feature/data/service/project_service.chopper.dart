@@ -28,8 +28,8 @@ class _$ProjectService extends ProjectService {
   }
 
   @override
-  Future<Response<dynamic>> getProject(String title) {
-    final Uri $url = Uri.parse('/projects/${title}');
+  Future<Response<dynamic>> getProject(int id) {
+    final Uri $url = Uri.parse('/projects/${id}');
     final Request $request = Request(
       'GET',
       $url,

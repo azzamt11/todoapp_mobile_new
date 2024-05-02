@@ -18,8 +18,8 @@ class ProjectRepositoryImpl implements ProjectRepository{
   }
 
   @override
-  Future<Response<Project>> getProject(String title) async {
-    var response = await projectService.getProject(title);
+  Future<Response<Project>> getProject(int id) async {
+    var response = await projectService.getProject(id);
     return  response.copyWith(body: Project.fromJson(response.body));
   }
 

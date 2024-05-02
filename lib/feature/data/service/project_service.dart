@@ -8,8 +8,8 @@ abstract class ProjectService extends ChopperService {
   @Get(path: "{query}")
   Future<Response> getAllProjects({@Path("query") String query});
 
-  @Get(path: "/{title}")
-  Future<Response> getProject(@Path("title") String title);
+  @Get(path: "/{id}")
+  Future<Response> getProject(@Path("id") int id);
 
   static ProjectService create() {
     final client = ChopperClient(

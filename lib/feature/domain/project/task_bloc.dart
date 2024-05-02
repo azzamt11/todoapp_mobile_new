@@ -26,7 +26,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     if (event is TaskLoad) {
       yield TaskLoading();
       Response<List<Task>> response =  await tasksRepository.getAllTasks(
-        projectTitle: event.projectTitle, 
+        projectId: event.projectId, 
         query: event.query
       );
       tasks= response.body?? [];
@@ -36,11 +36,21 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     if (event is TaskLoadMore) {
       loadedLastIndex += loadMoreCount;
       Response<List<Task>> response =  await tasksRepository.getAllTasks(
-        projectTitle: event.projectTitle, 
+        projectId: event.projectId, 
         query: event.query
       );
       tasks += (response.body?? []);
       yield TaskLoaded(tasks, response.body!.isEmpty);
+    }
+    if (event is TaskDelete) {
+      loadedLastIndex += loadMoreCount;
+      Response<dynamic> response =  await tasksRepository.deleteTask(event.projectId, event.id);
+      Response<List<Task>> reloadResponse =  await tasksRepository.getAllTasks(
+        projectId: event.projectId, 
+        query: event.query,
+      );
+      tasks += (response.body?? []);
+      yield TaskLoaded(tasks, reloadResponse.body!.isEmpty);
     }
   }
 }

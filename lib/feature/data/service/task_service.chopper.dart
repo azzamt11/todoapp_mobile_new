@@ -18,10 +18,10 @@ class _$TaskService extends TaskService {
 
   @override
   Future<Response<dynamic>> getAllTasks({
-    String? projectTitle,
+    int? projectId,
     String? query,
   }) {
-    final Uri $url = Uri.parse('/projects/${projectTitle}/tasks${query}');
+    final Uri $url = Uri.parse('/projects/${projectId}/tasks${query}');
     final Request $request = Request(
       'GET',
       $url,
@@ -32,10 +32,10 @@ class _$TaskService extends TaskService {
 
   @override
   Future<Response<dynamic>> getTask(
-    String? projectTitle,
-    String title,
+    int? projectId,
+    int id,
   ) {
-    final Uri $url = Uri.parse('/projects/${projectTitle}/tasks/${title}');
+    final Uri $url = Uri.parse('/projects/${projectId}/tasks/${id}');
     final Request $request = Request(
       'GET',
       $url,
@@ -45,10 +45,24 @@ class _$TaskService extends TaskService {
   }
 
   @override
-  Future<Response<dynamic>> postTask(String? projectTitle) {
-    final Uri $url = Uri.parse('/projects/${projectTitle}/tasks');
+  Future<Response<dynamic>> postTask(int? projectId) {
+    final Uri $url = Uri.parse('/projects/${projectId}/tasks');
     final Request $request = Request(
       'POST',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> deleteTask(
+    int? projectId,
+    int id,
+  ) {
+    final Uri $url = Uri.parse('/projects/${projectId}/tasks/${id}');
+    final Request $request = Request(
+      'DELETE',
       $url,
       client.baseUrl,
     );

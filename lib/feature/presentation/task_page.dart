@@ -40,6 +40,7 @@ class _TaskPageState extends State<TaskPage> {
   bool isChosing= false;
   bool isSearchLoading= false;
   bool localDone= false;
+  bool deleteIsLoading= false;
 
   int currentPage= 1;
   int drawerIncrement= 0;
@@ -59,7 +60,7 @@ class _TaskPageState extends State<TaskPage> {
 
     //initial data load
     _taskBloc.add(TaskLoad(
-      widget.project.title??"Untitled", 
+      widget.project.id??0, 
       StringFunctions().getTaskQuery(filters)
     ));
 
@@ -275,8 +276,8 @@ class _TaskPageState extends State<TaskPage> {
                   return TaskItemCard(
                     data: state.tasks[i], 
                     defaultWidth: size.width, 
-                    deleteIsLoading: false, 
-                    deleteFunction: () {}, 
+                    deleteIsLoading: deleteIsLoading, 
+                    deleteFunction: deleteFunction, 
                     type: 1
                   );
                 }
@@ -292,9 +293,19 @@ class _TaskPageState extends State<TaskPage> {
     );
   }
 
+  Future<void> deleteFunction(int id) async {
+    setState(() {
+      deleteIsLoading= true;
+    });
+    _taskBloc.add(TaskDelete(widget.project.id??0, id, StringFunctions().getTaskQuery(filters)));
+    if(_taskBloc.state == TaskLoaded) {
+      deleteIsLoading= false;
+    }
+  }
+
   Future<void> stateFunction(List<String> filters) async{
     _taskBloc.add(TaskLoad(
-      widget.project.title??"Untitled",
+      widget.project.id??0,
       StringFunctions().getTaskQuery(filters)
     ));
     Future.delayed(const Duration(milliseconds: 500));
@@ -307,7 +318,7 @@ class _TaskPageState extends State<TaskPage> {
   void loadData(String text) async {
     debugPrint("bloc function is executed!");
     _taskBloc.add(TaskLoad(
-      widget.project.title??"Untitled",
+      widget.project.id??0,
       "${StringFunctions().getTaskQuery(filters)}&search=$text&page=1"
     ));
     setState(() {
@@ -319,7 +330,7 @@ class _TaskPageState extends State<TaskPage> {
   // Check if the bloc state is not loading
    print("load more data...");
     _taskBloc.add(TaskLoadMore(
-      widget.project.title??"Untitled",
+      widget.project.id??0,
       "${StringFunctions().getTaskQuery(filters)}&search=${searchText.length> 3? searchText: ""}&page=${currentPage+1}"
     ));
     if(!localDone) {
