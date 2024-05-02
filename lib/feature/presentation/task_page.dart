@@ -7,13 +7,12 @@ import 'package:todoapp_mobile/feature/data/repository/task_repository_impl.dart
 import 'package:todoapp_mobile/feature/domain/project/task_bloc.dart';
 import 'package:todoapp_mobile/feature/domain/project/task_event.dart';
 import 'package:todoapp_mobile/feature/domain/project/task_state.dart';
+import 'package:todoapp_mobile/feature/presentation/constants/constants.dart';
 import 'package:todoapp_mobile/feature/presentation/helpers/string_functions.dart';
 import 'package:todoapp_mobile/feature/presentation/helpers/text_styles.dart';
-import 'package:todoapp_mobile/feature/presentation/task_page.dart';
 
 import 'package:todoapp_mobile/feature/presentation/widget/filter_drawer.dart';
 import 'package:todoapp_mobile/feature/presentation/widget/input_field.dart';
-import 'package:todoapp_mobile/feature/presentation/widget/item_card.dart';
 import 'package:todoapp_mobile/feature/presentation/widget/task_item_card.dart';
 
 
@@ -103,25 +102,62 @@ class _TaskPageState extends State<TaskPage> {
                                 children: [
                                   Container(
                                     height: 45,
+                                    padding: EdgeInsets.symmetric(horizontal: 17),
                                     width: size.width,
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Text(widget.project.title?? "Untitled", style: TextStyles().getStyle(4)),
-                                        const SizedBox(width: 20),
                                         SizedBox(
-                                          height: 40,
-                                          width: 40,
-                                          child: FloatingActionButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                drawerIncrement++;
-                                                isChosing= true;
-                                              });
-                                            },
-                                            backgroundColor: Colors.black,
-                                            child: const Icon(Icons.settings, color: Colors.white, size: 20),
+                                          height: 45,
+                                          width: size.width- 200,
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                widget.project.title?? "Untitled", 
+                                                style: TextStyles().getStyle(4),
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ]
+                                          )
+                                        ),
+                                        SizedBox(
+                                          height: 45,
+                                          width: 100,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              SizedBox(
+                                                height: 40,
+                                                width: 40,
+                                                child: FloatingActionButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      drawerIncrement++;
+                                                      isChosing= true;
+                                                    });
+                                                  },
+                                                  backgroundColor: Colors.black,
+                                                  child: const Icon(Icons.settings, color: Colors.white, size: 20),
+                                                )
+                                              ),
+                                              SizedBox(width: 5),
+                                              SizedBox(
+                                                height: 40,
+                                                width: 40,
+                                                child: FloatingActionButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      drawerIncrement++;
+                                                      isChosing= true;
+                                                    });
+                                                  },
+                                                  backgroundColor: Colors.black,
+                                                  child: const Icon(Icons.search, color: Colors.white, size: 20),
+                                                )
+                                              ),
+
+                                            ],
                                           )
                                         )
                                       ],
@@ -129,7 +165,7 @@ class _TaskPageState extends State<TaskPage> {
                                   ),
                                   isSearchLoading
                                       ? const CircularProgressIndicator()
-                                      : getInfiniteGridView(size)
+                                      : getListView(size)
                                 ],
                               )
                           ),
@@ -145,6 +181,9 @@ class _TaskPageState extends State<TaskPage> {
             height: size.height, 
             filters: filters, 
             drawerIncrement: drawerIncrement, 
+            sortByList: Constants().taskSortByList,
+            sortByOrder: Constants().taskSortByOrder,
+            filterList: Constants().taskfilterList,
             stateFunction: stateFunction
           )
         ],
@@ -211,7 +250,7 @@ class _TaskPageState extends State<TaskPage> {
     );
   }
 
-  Widget getInfiniteGridView(var size) {
+  Widget getListView(var size) {
     return Container(
         width: size.width,
         height: size.height- 100,
@@ -230,9 +269,6 @@ class _TaskPageState extends State<TaskPage> {
                     if(state.tasks.length%10==0 && !state.done) {
                       return Center(child: CircularProgressIndicator());
                     } else {
-                      setState(() {
-                        localDone= true;
-                      });
                       return SizedBox(height: 0);
                     }
                   }

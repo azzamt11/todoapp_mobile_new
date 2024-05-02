@@ -22,10 +22,18 @@ class TextStyles {
         color= Colors.orange;
         fontSize= 13;
       }
-      case 3: {
+      case 4: {
         color= Colors.black;
         fontSize= 20;
         fontWeight= FontWeight.bold;
+      }
+      case 5: {
+        color= Colors.orange;
+        fontSize= 15;
+      }
+      case 6: {
+        color= Colors.green;
+        fontSize= 15;
       }
       default: {
         color= Colors.black;

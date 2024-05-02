@@ -6,7 +6,7 @@ part 'task_service.chopper.dart';
 abstract class TaskService extends ChopperService {
 
   @Get(path: "/{projectTitle}/tasks{query}")
-  Future<Response> getAllTasks({@Path("projectTitle") String? projectTitle, @Path("query") String? query});
+  Future<Response> getAllTasks({@Path("projectTitle") String? projectTitle, @Path("query") String query});
 
   @Get(path: "/{projectTitle}/tasks/{title}")
   Future<Response> getTask(@Path("projectTitle") String? projectTitle, @Path("title") String title);

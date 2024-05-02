@@ -44,6 +44,7 @@ dependencies:
   logging: ^1.2.0
   google_fonts: ^4.0.4
   infinite_widgets: ^2.0.2
+  double_tap_to_exit: ^1.0.1
 
 dev_dependencies:
   flutter_test:

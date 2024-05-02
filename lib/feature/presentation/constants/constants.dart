@@ -1,17 +1,34 @@
 class Constants {
 
-  List<String> sortByList= [
+  List<String> projectSortByList= [
     "Title",
     "Created",
     "Updated",
   ];
 
-  List<String> sortByOrder= [
+  List<String> projectSortByOrder= [
     "Ascending",
     "Descending"
   ];
 
-  List<String> filterList= [
+  List<String> taskSortByList= [
+    "Title",
+    "Created",
+    "Updated",
+    "deadline",
+    "priority"
+  ];
+
+  List<String> taskSortByOrder= [
+    "Ascending",
+    "Descending"
+  ];
+
+  List<String> projectFilterList= [
+    "None"
+  ];
+
+  List<String> taskfilterList= [
     "None"
   ];
 }

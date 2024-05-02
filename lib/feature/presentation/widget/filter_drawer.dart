@@ -10,6 +10,9 @@ class FilterDrawer extends StatefulWidget {
   final double height;
   final int drawerIncrement;
   final List<String> filters;
+  final List<String> sortByList;
+  final List<String> sortByOrder;
+  final List<String> filterList;
   final ValueChanged<List<String>> stateFunction;
   const FilterDrawer({
     Key? key,
@@ -17,6 +20,9 @@ class FilterDrawer extends StatefulWidget {
     required this.height,
     required this.drawerIncrement,
     required this.filters,
+    required this.sortByList,
+    required this.sortByOrder,
+    required this.filterList,
     required this.stateFunction
   }) : super(key: key);
 
@@ -156,7 +162,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         "Sort By",
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 15),
                     Container(
                       width: size.width,
                       padding: const EdgeInsets.only(left: 5),
@@ -164,7 +170,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         physics: const BouncingScrollPhysics(),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: getFilterList(size, Constants().sortByList, 0),
+                          children: getFilterList(size, widget.sortByList, 0),
                         )
                       )
                     ),
@@ -173,7 +179,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         "Sort Order",
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 15),
                     Container(
                       width: size.width,
                       padding: const EdgeInsets.only(left: 5),
@@ -181,7 +187,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         physics: const BouncingScrollPhysics(),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: getFilterList(size, Constants().sortByOrder, 1),
+                          children: getFilterList(size, widget.sortByOrder, 1),
                         )
                       )
                     ),
@@ -190,7 +196,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         "Filter",
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 15),
                     Container(
                       width: size.width,
                       padding: const EdgeInsets.only(left: 5),
@@ -198,7 +204,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         physics: const BouncingScrollPhysics(),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: getFilterList(size, Constants().filterList, 2),
+                          children: getFilterList(size, widget.filterList, 2),
                         )
                       )
                     ),
@@ -292,7 +298,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
             });
           },
           child: Container(
-            height: 50,
+            height: 35,
             width: size.width,
             padding: const EdgeInsets.only(left: 15, right: 15),
             color: Colors.white,

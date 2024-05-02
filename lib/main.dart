@@ -1,5 +1,8 @@
 import 'package:todoapp_mobile/feature/data/repository/project_repository_impl.dart';
+import 'package:todoapp_mobile/feature/data/repository/task_repository.dart';
+import 'package:todoapp_mobile/feature/data/repository/task_repository_impl.dart';
 import 'package:todoapp_mobile/feature/data/service/project_service.dart';
+import 'package:todoapp_mobile/feature/data/service/task_service.dart';
 import 'package:todoapp_mobile/feature/presentation/initial_page.dart';
 
 import 'package:flutter/material.dart';
@@ -18,7 +21,9 @@ void main() {
 class MyApp extends StatelessWidget {
 
   static ProjectService projectService = ProjectService.create();
+  static TaskService taskService = TaskService.create();
   final ProjectRepositoryImpl projectsRepository = ProjectRepositoryImpl(projectService: projectService);
+  final TaskRepositoryImpl taskRepository = TaskRepositoryImpl(taskService: taskService);
 
   // This widget is the root of your application.
   @override
@@ -27,6 +32,9 @@ class MyApp extends StatelessWidget {
         providers: [
           RepositoryProvider(
               create: (_) => projectsRepository,
+          ),
+          RepositoryProvider(
+              create: (_) => taskRepository,
           )
         ],
         child: MaterialApp(

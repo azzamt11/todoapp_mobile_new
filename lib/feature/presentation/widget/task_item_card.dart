@@ -42,43 +42,28 @@ class _TaskItemCardState extends State<TaskItemCard> {
             Container(
               height: 140,
               width: 90,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: const Color.fromRGBO(230, 230, 230, 1),
-              ),
-              child: const Center(
-                  child: SizedBox(
-                      height: 70,
-                      width: 90 - 20,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: Center(
-                                child: Icon(Icons.task,
-                                    color: Colors.white,
-                                    size: 20),
-                              ),
-                            ),
-                            SizedBox(
-                                height: 50,
-                                width: 175 - 20,
-                                child: Align(
-                                    alignment: Alignment.center,
-                                    child: Text("Tidak Dapat Memuat Gambar",
-                                        style: TextStyle(
-                                            color: Colors.black12
-                                        ),
-                                        textAlign: TextAlign.center
-                                    )
-                                )
-                            )
-                          ]
-                      )
-                  )
+              child: Center(
+                  child: Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.blue,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white12,
+                          offset: Offset(2, 2),
+                          blurRadius: 2, 
+                          spreadRadius: 2,
+                        )
+                      ]
+                    ),
+                    child: Center(
+                      child: Icon(Icons.task,
+                          color: Colors.orange,
+                          size: 35),
+                    ),
+                  ),
               )
             ),
             Positioned(
@@ -88,6 +73,7 @@ class _TaskItemCardState extends State<TaskItemCard> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 10),
                         Container(
                           width: descriptionWidth,
                           padding: const EdgeInsets.only(bottom: 7, left: 15),
@@ -97,35 +83,27 @@ class _TaskItemCardState extends State<TaskItemCard> {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        widget.type==0? Container(
-                          height: 25,
-                          width: descriptionWidth,
-                          padding: const EdgeInsets.only(left: 15),
-                          child: Text(
-                            widget.data.createdAt.toString(),
-                            style: TextStyles().getStyle(3)
-                          ),
-                        ): Container(
-                          height: 45,
+                        Container(
+                          height: 22,
                           width: descriptionWidth,
                           padding: const EdgeInsets.only(left: 15),
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              widget.data.done!.toLowerCase()=="true"? "Done" : "In Progress",
-                              style: TextStyles().getStyle(3)
+                              widget.data.done??false? "Done" : "In Progress",
+                              style: TextStyles().getStyle(widget.data.done??false? 6 : 5)
                             ),
                           )
                         ),
                         Container(
-                          height: 25,
+                          height: 22,
                           width: descriptionWidth,
                           padding: const EdgeInsets.only(left: 15),
                           child: Align(
                             alignment: widget.type==0? Alignment.topLeft : Alignment.bottomLeft,
                             child: Text(
                               "Deadline: ${widget.data.deadline}",
-                              style: TextStyles().getStyle(3)
+                              style: TextStyles().getStyle(5)
                             )
                           ),
                         ),
@@ -133,34 +111,87 @@ class _TaskItemCardState extends State<TaskItemCard> {
                     )
                 )
             ),
-            widget.type==0? Positioned(
-                bottom: 5,
-                left: 89,
-                child: Container(
-                    margin: const EdgeInsets.only(left: 6),
-                    child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            if(!widget.deleteIsLoading) {
-                              widget.deleteFunction(widget.data.id??0, size);
-                            }
-                          },
-                          splashColor: Colors.black12,
-                          child: SizedBox(
-                            height: 30,
-                            width: 30,
-                            child: Center(
-                              child: Icon(Icons.delete_outline,
-                                  color: Colors.white,
-                                  size: 25
-                              ),
+            Positioned(
+              bottom: 10,
+              left: 105,
+              child: SizedBox(
+                child: Row(
+                  children: [
+                    Container(
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 26,
+                            width: 26,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.red,
                             ),
                           ),
-                        )
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                if(!widget.deleteIsLoading) {
+                                  widget.deleteFunction(widget.data.id??0, size);
+                                }
+                              },
+                              splashColor: Colors.white12,
+                              child: SizedBox(
+                                height: 26,
+                                width: 26,
+                                child: Center(
+                                  child: Icon(Icons.delete_outline,
+                                    color: Colors.white,
+                                    size: 25
+                                  ),
+                                ),
+                              ),
+                            )
+                          )
+                        ],
+                      )
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 26,
+                            width: 26,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.orange,
+                            ),
+                          ),
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                if(!widget.deleteIsLoading) {
+                                  widget.deleteFunction(widget.data.id??0, size);
+                                }
+                              },
+                              splashColor: Colors.white12,
+                              child: SizedBox(
+                                height: 26,
+                                width: 26,
+                                child: Center(
+                                  child: Icon(Icons.edit,
+                                    color: Colors.white,
+                                    size: 22
+                                  ),
+                                ),
+                              ),
+                            )
+                          )
+                        ],
+                      )
                     )
+                  ],
                 )
-            ) : const SizedBox()
+              )
+            )
           ],
         )
     );

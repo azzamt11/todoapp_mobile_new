@@ -15,7 +15,7 @@ class TaskRepositoryImpl implements TaskRepository{
 
 
   @override
-  Future<Response<List<Task>>> getAllTasks({String? projectTitle, String? query}) async {
+  Future<Response<List<Task>>> getAllTasks({String? projectTitle, required String query}) async {
     var response = await taskService.getAllTasks(query: query, projectTitle: projectTitle);
     return response.copyWith(body: List<Task>.from(response.body.map((e) => Task.fromJson(e))));
   }

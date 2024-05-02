@@ -11,7 +11,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) => Task(
       title: json['title'] as String?,
       priority: json['priority'] as String?,
       deadline: json['deadline'] as String?,
-      done: json['done'] as String?,
+      done: json['done'] as bool?,
       createdAt: json['CreatedAt'] == null
           ? null
           : DateTime.parse(json['CreatedAt'] as String),

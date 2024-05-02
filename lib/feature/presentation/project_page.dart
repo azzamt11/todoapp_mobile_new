@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:double_tap_to_exit/double_tap_to_exit.dart';
 import 'package:todoapp_mobile/feature/data/repository/project_repository_impl.dart';
 import 'package:todoapp_mobile/feature/domain/project/project_bloc.dart';
 import 'package:todoapp_mobile/feature/domain/project/project_event.dart';
 import 'package:todoapp_mobile/feature/domain/project/project_state.dart';
+import 'package:todoapp_mobile/feature/presentation/constants/constants.dart';
 import 'package:todoapp_mobile/feature/presentation/helpers/string_functions.dart';
 import 'package:todoapp_mobile/feature/presentation/task_page.dart';
 
@@ -68,79 +70,87 @@ class _ProjectPageState extends State<ProjectPage> {
   @override
   Widget build(BuildContext context) {
     var size= MediaQuery.of(context).size;
-    return Material(
-      child: Stack(
-        children: [
-          Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: Container(
-              height: size.height,
-              width: size.width,
-              color: Colors.white,
-              child: SafeArea(
-                child: GestureDetector(
-                  onTap: () {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                  },
-                  child: Container(
-                      height: size.height,
-                      width: size.width,
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Stack(
-                        children: [
-                          SizedBox(
-                              width: size.width,
-                              child: Column(
-                                mainAxisAlignment: isSearchLoading? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    height: 45,
-                                    width: size.width,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        getInputField(size),
-                                        const SizedBox(width: 20),
-                                        SizedBox(
-                                          height: 40,
-                                          width: 40,
-                                          child: FloatingActionButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                drawerIncrement++;
-                                                isChosing= true;
-                                              });
-                                            },
-                                            backgroundColor: Colors.black,
-                                            child: const Icon(Icons.settings, color: Colors.white, size: 20),
+    return DoubleTapToExit(
+      snackBar: SnackBar(
+        content: Text("Click again to exit"),
+      ),
+      child: Material(
+        child: Stack(
+          children: [
+            Scaffold(
+              resizeToAvoidBottomInset: false,
+              body: Container(
+                height: size.height,
+                width: size.width,
+                color: Colors.white,
+                child: SafeArea(
+                  child: GestureDetector(
+                    onTap: () {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                    },
+                    child: Container(
+                        height: size.height,
+                        width: size.width,
+                        padding: const EdgeInsets.only(top: 15),
+                        child: Stack(
+                          children: [
+                            SizedBox(
+                                width: size.width,
+                                child: Column(
+                                  mainAxisAlignment: isSearchLoading? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      height: 45,
+                                      width: size.width,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          getInputField(size),
+                                          const SizedBox(width: 20),
+                                          SizedBox(
+                                            height: 40,
+                                            width: 40,
+                                            child: FloatingActionButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  drawerIncrement++;
+                                                  isChosing= true;
+                                                });
+                                              },
+                                              backgroundColor: Colors.black,
+                                              child: const Icon(Icons.settings, color: Colors.white, size: 20),
+                                            )
                                           )
-                                        )
-                                      ],
-                                    )
-                                  ),
-                                  isSearchLoading
-                                      ? const CircularProgressIndicator()
-                                      : getInfiniteGridView(size)
-                                ],
-                              )
-                          ),
-                        ],
-                      )
+                                        ],
+                                      )
+                                    ),
+                                    isSearchLoading
+                                        ? const CircularProgressIndicator()
+                                        : getInfiniteGridView(size)
+                                  ],
+                                )
+                            ),
+                          ],
+                        )
+                    )
                   )
                 )
               )
+            ),
+            FilterDrawer(
+              isLoading: false, 
+              height: size.height, 
+              filters: filters, 
+              drawerIncrement: drawerIncrement,
+              sortByList: Constants().projectSortByList,
+              sortByOrder: Constants().projectSortByOrder,
+              filterList: Constants().projectFilterList, 
+              stateFunction: stateFunction
             )
-          ),
-          FilterDrawer(
-            isLoading: false, 
-            height: size.height, 
-            filters: filters, 
-            drawerIncrement: drawerIncrement, 
-            stateFunction: stateFunction
-          )
-        ],
-      ),
+          ],
+        ),
+      )
     );
   }
 
@@ -228,9 +238,6 @@ class _ProjectPageState extends State<ProjectPage> {
                     if(state.projects.length%10==0 && !state.done) {
                       return Center(child: CircularProgressIndicator());
                     } else {
-                      setState(() {
-                        localDone= true;
-                      });
                       return SizedBox(height: 0);
                     }
                   }

@@ -14,7 +14,7 @@ class Task {
   @JsonKey(name:'deadline')
   final String? deadline;
   @JsonKey(name:'done')
-  final String? done;
+  final bool? done;
   @JsonKey(name:'CreatedAt')
   final DateTime? createdAt;
   @JsonKey(name:'UpdatedAt')
