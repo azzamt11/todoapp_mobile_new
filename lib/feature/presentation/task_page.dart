@@ -182,12 +182,15 @@ class _TaskPageState extends State<TaskPage> {
             bottom: 30,
             right: 30,
             child: FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
+              onPressed: () async {
+                await Navigator.push(
                   context, MaterialPageRoute(
                     builder: (context)=> CreateTaskPage(data: widget.project)
                   )
                 );
+                _taskBloc.add(TaskLoad(
+                  widget.project.id??0, StringFunctions().getTaskQuery(filters)
+                ));
               },
               backgroundColor: Colors.black,
               child: Center(

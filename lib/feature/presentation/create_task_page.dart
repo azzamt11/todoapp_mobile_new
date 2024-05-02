@@ -9,6 +9,7 @@ import 'package:todoapp_mobile/feature/domain/project/task_bloc.dart';
 import 'package:todoapp_mobile/feature/domain/project/task_event.dart';
 import 'package:todoapp_mobile/feature/presentation/constants/constants.dart';
 import 'package:todoapp_mobile/feature/presentation/constants/priority.dart';
+import 'package:todoapp_mobile/feature/presentation/helpers/string_functions.dart';
 import 'package:todoapp_mobile/feature/presentation/helpers/text_styles.dart';
 import 'package:todoapp_mobile/feature/presentation/widget/input_field.dart';
 
@@ -477,8 +478,8 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
       widget.data.id??0,
       {
         "title": titleController.text,
-        "deadline": deadline,
-        "priority": priority.level,
+        "deadline": StringFunctions().getFormated(deadline),
+        "priority": priority.level.toString(),
         "done": false,
         "project_id": widget.data.id
       }

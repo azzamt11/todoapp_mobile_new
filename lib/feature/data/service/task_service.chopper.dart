@@ -45,12 +45,17 @@ class _$TaskService extends TaskService {
   }
 
   @override
-  Future<Response<dynamic>> postTask(int? projectId, Map<String, dynamic> body) {
+  Future<Response<dynamic>> postTask(
+    int? projectId,
+    Map<String, dynamic> body,
+  ) {
     final Uri $url = Uri.parse('/projects/${projectId}/tasks');
+    final $body = body;
     final Request $request = Request(
       'POST',
       $url,
       client.baseUrl,
+      body: $body,
     );
     return client.send<dynamic, dynamic>($request);
   }
